@@ -1,0 +1,1 @@
+controller.web.LogoutController

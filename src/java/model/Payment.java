@@ -9,6 +9,16 @@ public class Payment {
     private String transactionId;
     private double amountPaid;
 
+    public Payment(int paymentId, int orderId, int accountId, String paymentMethod, String status, String transactionId, double amountPaid) {
+        this.paymentId = paymentId;
+        this.orderId = orderId;
+        this.accountId = accountId;
+        this.paymentMethod = paymentMethod;
+        this.status = status;
+        this.transactionId = transactionId;
+        this.amountPaid = amountPaid;
+    }
+
     
     public Payment() {}
 

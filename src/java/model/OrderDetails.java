@@ -5,10 +5,21 @@ public class OrderDetails {
     private Product product;
     private int price;
     private int amount;
-      private String name, imageUrl;
+    private String name, imageUrl;
+    private int productId;
     
     public OrderDetails() {
     }
+
+    public OrderDetails(int orderId, int price, int amount, String name, String imageUrl, int productId) {
+        this.orderId = orderId;
+        this.price = price;
+        this.amount = amount;
+        this.name = name;
+        this.imageUrl = imageUrl;
+        this.productId = productId;
+    }
+    
 
     public OrderDetails(int orderId, int price, int amount, String name, String imageUrl) {
         this.orderId = orderId;
@@ -24,6 +35,14 @@ public class OrderDetails {
         this.product = product;
         this.price = price;
         this.amount = amount;
+    }
+
+    public int getProductId() {
+        return productId;
+    }
+
+    public void setProductId(int productId) {
+        this.productId = productId;
     }
 
     public int getOrderId() {

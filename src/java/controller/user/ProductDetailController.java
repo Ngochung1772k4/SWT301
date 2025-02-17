@@ -24,23 +24,23 @@ public class ProductDetailController extends HttpServlet {
         String productIdStr = request.getParameter("productId");
 
         try {
-            // 1. Validate productId
+           
             int productId = Integer.parseInt(productIdStr);
             
-            // 2. Khởi tạo DAO
+          
             ProductDAO productDAO = new ProductDAO();
             SuppliersDAO supplierDAO = new SuppliersDAO();
             ImagesDAO imagesDAO = new ImagesDAO();
             UnitsDAO unitsDAO = new UnitsDAO();
 
-            // 3. Lấy thông tin sản phẩm
+            
             Product product = productDAO.getProductById(productId);
             if (product == null) {
                 response.sendError(HttpServletResponse.SC_NOT_FOUND, "Sản phẩm không tồn tại");
                 return;
             }
 
-            // 4. Lấy dữ liệu liên quan
+           
             Suppliers supplier = product.getSupplierId() != null 
                                 ? supplierDAO.getSupplierById(product.getSupplierId()) 
                                 : null;
@@ -49,7 +49,7 @@ public class ProductDetailController extends HttpServlet {
                         ? unitsDAO.getUnitById(product.getUnitId()) 
                         : null;
 
-            // 5. Set attributes
+          
             request.setAttribute("product", product);
             request.setAttribute("supplier", supplier);
             request.setAttribute("images", images);

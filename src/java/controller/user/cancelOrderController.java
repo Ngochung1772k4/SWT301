@@ -5,12 +5,15 @@
 package controller.user;
 
 import DAL.OrderDAO;
+import DAL.ProductDAO;
 import java.io.IOException;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import java.util.List;
+import model.OrderDetails;
 
 /**
  *
@@ -28,15 +31,29 @@ public class cancelOrderController extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        String order_id = request.getParameter("order_id");
-        OrderDAO dao = new OrderDAO();
-        dao.cancelOrder(Integer.parseInt(order_id));
-        response.sendRedirect("listorder");
-    }
+protected void processRequest(HttpServletRequest request, HttpServletResponse response)
+        throws ServletException, IOException {
+    response.setContentType("text/html;charset=UTF-8");
+    String order_id = request.getParameter("order_id");
+    OrderDAO orderDAO = new OrderDAO();
+    ProductDAO productDAO = new ProductDAO();
 
+    try {
+    
+        orderDAO.cancelOrder(Integer.parseInt(order_id));
+
+        List<OrderDetails> orderDetails = orderDAO.getDetail(order_id);
+        for (OrderDetails detail : orderDetails) {
+            productDAO.restoreProductQuantity(detail.getProductId(), detail.getAmount());
+        }
+
+        response.sendRedirect("listorder");
+    } catch (Exception e) {
+        e.printStackTrace();
+        request.setAttribute("error", "Hủy đơn hàng thất bại.");
+        request.getRequestDispatcher("/error.jsp").forward(request, response);
+    }
+}
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.

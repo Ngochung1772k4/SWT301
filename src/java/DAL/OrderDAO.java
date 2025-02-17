@@ -160,10 +160,12 @@ public void changeStatusOrder(String order_id, int status) {
             }
             list.add(new OrderDetails(
                 rs.getInt("order_id"),
+                    
                 rs.getInt("price"),
                 rs.getInt("amount"),
                 rs.getString("name"),
-                imageUrl
+                imageUrl,
+                    rs.getInt("product_id") 
             ));
         }
     } catch (Exception e) {

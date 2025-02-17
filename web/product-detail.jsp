@@ -95,8 +95,8 @@
                             <c:when test="${product.weight != null}">
                                 ${product.weight} 
                                 <c:choose>
-                                    <c:when test="${units != null}">
-                                        ${units.name}
+                                    <c:when test="${unit != null}">
+                                        ${unit.name}
                                     </c:when>
                                     <c:otherwise>
                                         (Đơn vị không xác định)
@@ -147,7 +147,7 @@
                                 </div>
                                 <div class="d-flex gap-2">
                                     <button type="submit" class="btn btn-success rounded-1 px-4">Thêm Vào Giỏ Hàng</button>
-                                   
+
                                 </div>
                             </c:when>
                             <c:otherwise>
@@ -156,7 +156,7 @@
                                 </div>
                                 <div class="d-flex gap-2">
                                     <button type="button" class="btn btn-secondary rounded-1 px-4" disabled>Thêm Vào Giỏ Hàng</button>
-                                  
+
                                 </div>
                             </c:otherwise>
                         </c:choose>
@@ -183,89 +183,74 @@
 
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
         <script>
 
 
-                                        function changeMainImage(imageUrl) {
-                                            document.getElementById('mainImage').src = imageUrl;
-                                        }
+                                    function changeMainImage(imageUrl) {
+                                        document.getElementById('mainImage').src = imageUrl;
+                                    }
 
 
 
 
         </script>
-        
-     <script>
-    $(document).ready(function () {
-        $("#addToCartForm").submit(function (event) {
-            event.preventDefault();
 
-            var form = $(this);
-            var productId = form.find("input[name='id']").val();
-            var quantityInput = form.find("input[name='num']");
-            var quantity = parseInt(quantityInput.val());
-            var maxQuantity = parseInt(quantityInput.attr('max'));
+        <script>
+            $(document).ready(function () {
+                $("#addToCartForm").submit(function (event) {
+                    event.preventDefault();
+                    var form = $(this);
+                    var productId = form.find("input[name='id']").val();
+                    var quantityInput = form.find("input[name='num']");
+                    var quantity = parseInt(quantityInput.val());
 
-            // Kiểm tra số lượng hợp lệ
-            if (quantity > maxQuantity) {
-                alert("Số lượng vượt quá hàng tồn kho!");
-                return;
-            }
-
-            $.ajax({
-                url: 'addtocart',
-                type: 'POST',
-                data: {
-                    id: productId,
-                    num: quantity
-                },
-                success: function (response) {
-                    // Cập nhật badge giỏ hàng
-                    $(".badge").text(response.size);
-                    
-                    // Tính số lượng tồn kho mới
-                    var newQuantity = maxQuantity - quantity;
-                    
-                    // Cập nhật giao diện
-                    updateProductStatusUI(newQuantity);
-                    
-                    alert("Sản phẩm đã được thêm vào giỏ hàng!");
-                },
-                error: function (xhr) {
-                    if (xhr.responseJSON && xhr.responseJSON.message) {
-                        alert(xhr.responseJSON.message); // Hiển thị thông báo lỗi từ server
-                    } else {
-                        alert("Có lỗi xảy ra khi thêm sản phẩm vào giỏ hàng.");
-                    }
-                }
+                    $.ajax({
+                        url: 'addtocart',
+                        type: 'POST',
+                        data: {
+                            id: productId,
+                            num: quantity
+                        },
+                        success: function (response) {
+                            if (response.status === "success") {
+                                $(".badge").text(response.size);
+                                // Hiển thị thông báo thành công bằng Toastr
+                                toastr.success("Sản phẩm đã được thêm vào giỏ hàng!");
+                            } else {
+                                // Hiển thị thông báo lỗi bằng Toastr
+                                toastr.error(response.message.replace('localhost9999:say', ''));
+                            }
+                        },
+                        error: function (xhr) {
+                            try {
+                                var errorResponse = JSON.parse(xhr.responseText);
+                                // Hiển thị thông báo lỗi bằng Toastr
+                                toastr.error(errorResponse.message.replace('localhost9999:say', ''));
+                            } catch (e) {
+                                // Hiển thị thông báo lỗi tổng quát bằng Toastr
+                                toastr.error("Có lỗi xảy ra khi thêm sản phẩm vào giỏ hàng.");
+                            }
+                        }
+                    });
+                });
             });
-        });
-    });
-
-    function updateProductStatusUI(newQuantity) {
-        // Cập nhật thông báo trạng thái
-        var statusElement = $(".product-status");
-        if (newQuantity > 0) {
-            statusElement.html(`Còn hàng (${newQuantity} sản phẩm)`);
-        } else {
-            statusElement.html('<span class="text-danger">Hết hàng</span>');
-        }
-
-        // Cập nhật input số lượng
-        var quantityInput = $("#quantity");
-        quantityInput.attr("max", newQuantity);
-        if (newQuantity <= 0) {
-            quantityInput.val(0).prop("disabled", true); 
-        }
-        if (newQuantity <= 0) {
-            $(".btn-success, .btn-primary")
-                .prop("disabled", true)
-                .removeClass("btn-success btn-primary")
-                .addClass("btn-secondary");
-        }
-    }
+        </script>
+        <script>
+        toastr.options = {
+            closeButton: true, 
+            progressBar: true, 
+            positionClass: "toast-top-left",
+            preventDuplicates: true, 
+            timeOut: 2000, 
+            extendedTimeOut: 1000, 
+            showMethod: "slideDown", 
+            hideMethod: "slideUp", 
+            showEasing: "swing",
+            hideEasing: "linear",
+        };
 </script>
-            
-             
+
     </body>
 </html>

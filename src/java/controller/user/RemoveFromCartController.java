@@ -78,12 +78,7 @@ public class RemoveFromCartController extends HttpServlet {
 
         if (cart != null) {
             Item item = cart.getItemById(productId);
-            if (item != null) {
-                
-                ProductDAO dao = new ProductDAO();
-                dao.updateProductQuantity(productId, -item.getQuantity());
-
-                
+            if (item != null) {  
                 cart.removeItem(productId);
             }
         }

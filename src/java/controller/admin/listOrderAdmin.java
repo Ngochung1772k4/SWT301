@@ -46,7 +46,7 @@ public class listOrderAdmin extends HttpServlet {
         } else if (status.equals("2")) {
             list_order = dao.getOrderbyStatus("2");
         } else if (status.equals("3")) {
-            list_order = dao.getOrderbyStatus("3");
+            list_order = dao.getOrderbyStatus("3");         
         }
 
         for (int i = list_order.size() - 1; 0 <= i; i--) {

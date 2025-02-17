@@ -19,7 +19,7 @@
         <link rel="stylesheet" href="../../css/admin_style.css">
         <style>
             .datatable-table td, th {
-                padding: 8px; /* Adjust the value to set the desired spacing */
+                padding: 8px; 
             }
 
             .modal-add {
@@ -28,12 +28,12 @@
 
             .form-group input,
             .form-group textarea {
-                font-size: 11px; /* You can adjust the font size as needed */
+                font-size: 11px; 
             }
 
             .scrollable-table {
-                max-height: 600px; /* Đặt chiều cao tối đa của bảng */
-                overflow: auto; /* Tạo thanh cuộn nếu bảng vượt quá kích thước tối đa */
+                max-height: 600px; 
+                overflow: auto; 
             }
         </style>
     </head>

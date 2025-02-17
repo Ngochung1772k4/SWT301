@@ -17,9 +17,10 @@
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
               integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
         <link rel="stylesheet" href="../../css/admin_style.css">
+
         <style>
             .datatable-table td, th {
-                padding: 8px; /* Adjust the value to set the desired spacing */
+                padding: 8px; 
             }
 
             .modal-add {
@@ -28,12 +29,12 @@
 
             .form-group input,
             .form-group textarea {
-                font-size: 13px; /* You can adjust the font size as needed */
+                font-size: 13px;
             }
 
             .scrollable-table {
-                max-height: 600px; /* Đặt chiều cao tối đa của bảng */
-                overflow: auto; /* Tạo thanh cuộn nếu bảng vượt quá kích thước tối đa */
+                max-height: 600px; 
+                overflow: auto; 
             }
         </style>
     </head>
@@ -51,82 +52,93 @@
                             </div>
                             <div class="card-body scrollable-table">
                                 <table id="datatablesSimple" class="datatable-table">
-    <thead>
-        <tr style="font-size: 13px">
-            <th>Order ID</th>
-            <th style="width: 20%">Họ và tên</th>
-            <th style="width: 15%">Email</th>
-            <th style="width: 7%">Số điện thoại</th>
-            <th style="width: 25%">Địa chỉ</th>
-            <th style="width: 25%">Ghi chú</th>
-            <th>Created at</th>
-            <th>Tổng tiền</th>
-            <th style="width: 10%">Tình trạng</th>
-            <th>Actions</th>
-            <th>Chi tiết</th>
-        </tr>
-    </thead>
-    <tbody>
-        <c:forEach items="${listOrder}" var="order">
-            <tr style="font-size: 13px">
-                <td>${order.orderId}</td>
-                <td>${order.fullname}</td>
-                <td>${order.email}</td>
-                <td>${order.phoneNumber}</td>
-                <td>${order.address}</td>
-                <td>${order.note}</td>
-                <td>${order.orderDate}</td>
-                <td>${order.totalMoney}</td>
-                <td>
-                    <c:choose>
-                        <c:when test="${order.status eq 3}">
-                            <span style="color: red">Đã hủy</span>
-                        </c:when>
-                        <c:when test="${order.status eq 2}">
-                            <span style="color: green">Đã hoàn thành</span>
-                        </c:when>
-                        <c:when test="${order.status eq 1}">
-                            <span style="color: #FFC107">Đang vận chuyển</span>
-                        </c:when>
-                        <c:when test="${order.status eq 0}">
-                            <span style="color: #FFC107">Đang xử lý</span>
-                        </c:when>
-                    </c:choose>
-                </td>
-                <td>
-                    <c:choose>
-                        <c:when test="${order.status eq 0}">
-                            <a onclick="ChangeInfo('${order.orderId}', '${order.fullname}', '${order.phoneNumber}', '${order.email}', '${order.address}', '${order.note}')" 
-                               style="font-size: 15px; color: green" 
-                               data-bs-toggle="modal" data-bs-target="#changeInfoModal" title="Edit"> 
-                                <i class="lni lni-pencil"></i>
-                            </a>
-                        </c:when>
-                    </c:choose>
-                    <c:choose>
-                        <c:when test="${order.status eq 0}">
-                            <a onclick="CancelOrder('${order.orderId}')" 
-                               style="font-size: 15px; color: red"
-                               data-bs-toggle="modal" data-bs-target="#cancelOrderModal" title="Cancel"> 
-                                <i class="lni lni-trash-can"></i>
-                            </a>    
-                        </c:when>
-                    </c:choose>
-                </td>
-                <td>
-                    <a style="color: #0d6efd" href="orderdetail?order_id=${order.orderId}">Chi tiết</a>
-                </td>
-            </tr>   
-        </c:forEach>
-    </tbody>
-</table>
+                                    <thead>
+                                        <tr style="font-size: 13px">
+                                            <th>Order ID</th>
+                                            <th style="width: 20%">Họ và tên</th>
+                                            <th style="width: 15%">Email</th>
+                                            <th style="width: 7%">Số điện thoại</th>
+                                            <th style="width: 25%">Địa chỉ</th>
+                                            <th>Phương thức TT</th>
+                                            
+                                            <th style="width: 25%">Ghi chú</th>
+
+                                            <th>Created at</th>
+                                            <th>Tổng tiền</th>
+                                            <th style="width: 10%">Tình trạng</th>
+                                            <th>Actions</th>
+                                            <th>Chi tiết</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                    <c:forEach items="${listOrder}" var="order">
+                                        <tr style="font-size: 13px">
+                                            <td>${order.orderId}</td>
+                                            <td>${order.fullname}</td>
+                                            <td>${order.email}</td>
+                                            <td>${order.phoneNumber}</td>
+                                            <td>${order.address}</td>
+                                            <td>
+                                                <c:choose>
+                                                    <c:when test="${not empty order.payment}">
+                                                        ${order.payment.paymentMethod}
+                                                    </c:when>
+                                                </c:choose>
+                                            </td>
+                                           
+                                            <td>${order.note}</td>
+                                            <td>${order.orderDate}</td>
+                                            <td>${order.totalMoney}</td>
+                                            <td>
+                                                <c:choose>
+                                                    <c:when test="${order.status eq 3}">
+                                                        <span style="color: red">Đã hủy</span>
+                                                    </c:when>
+                                                    <c:when test="${order.status eq 2}">
+                                                        <span style="color: green">Đã hoàn thành</span>
+                                                    </c:when>
+                                                    <c:when test="${order.status eq 1}">
+                                                        <span style="color: #FFC107">Đang vận chuyển</span>
+                                                    </c:when>
+                                                    <c:when test="${order.status eq 0}">
+                                                        <span style="color: #FFC107">Đang xử lý</span>
+                                                    </c:when>
+                                                </c:choose>
+                                            </td>
+                                            <td>
+                                                <c:choose>
+                                                    <c:when test="${order.status eq 0}">
+                                                        <a onclick="ChangeInfo('${order.orderId}', '${order.fullname}', '${order.phoneNumber}', '${order.email}', '${order.address}', '${order.note}')" 
+                                                           style="font-size: 15px; color: green" 
+                                                           data-bs-toggle="modal" data-bs-target="#changeInfoModal" title="Edit"> 
+                                                            <i class="lni lni-pencil"></i>
+                                                        </a>
+                                                    </c:when>
+                                                </c:choose>
+                                                <c:choose>
+                                                    <c:when test="${order.status eq 0}">
+                                                        <a onclick="CancelOrder('${order.orderId}')" 
+                                                           style="font-size: 15px; color: red"
+                                                           data-bs-toggle="modal" data-bs-target="#cancelOrderModal" title="Cancel"> 
+                                                            <i class="lni lni-trash-can"></i>
+                                                        </a>    
+                                                    </c:when>
+                                                </c:choose>
+                                            </td>
+                                            <td>
+                                                <a style="color: #0d6efd" href="orderdetail?order_id=${order.orderId}">Chi tiết</a>
+                                            </td>
+                                        </tr>   
+                                    </c:forEach>
+                                </tbody>
+                            </table>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
 
-        <!-- Confirm order information -->
+     
         <div id="changeInfoModal" class="modal fade">
             <div class="modal-dialog">
                 <div class="modal-content">
@@ -167,7 +179,6 @@
             </div>
         </div>
 
-        <!-- Delete category modal -->
         <div id="cancelOrderModal" class="modal fade">
             <div class="modal-dialog">
                 <div class="modal-content">

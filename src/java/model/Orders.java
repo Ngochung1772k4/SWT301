@@ -16,6 +16,8 @@ public class Orders {
     private int status;
     private int totalMoney;
     private List<OrderDetails> list;
+    
+    private Payment payment;
 
     public Orders() {
     }
@@ -140,6 +142,13 @@ public class Orders {
 
     public void setList(List<OrderDetails> list) {
         this.list = list;
+    }
+    public Payment getPayment() {
+        return payment;
+    }
+
+    public void setPayment(Payment payment) {
+        this.payment = payment;
     }
     
  

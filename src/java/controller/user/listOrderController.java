@@ -5,6 +5,7 @@ package controller.user;
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
 import DAL.OrderDAO;
+import DAL.PaymentDAO;
 import java.io.IOException;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -16,6 +17,7 @@ import java.util.ArrayList;
 import java.util.List;
 import model.Account;
 import model.Orders;
+import model.Payment;
 
 
 /**
@@ -48,10 +50,14 @@ public class listOrderController extends HttpServlet {
             }
         }
         List<Orders> new_list_order = new ArrayList<>();
-        for (int i = list_order_of_user.size() - 1; 0 <= i; i--) {
-            new_list_order.add(list_order_of_user.get(i));
-        }
+        PaymentDAO paymentDAO = new PaymentDAO(); 
 
+    for (int i = list_order_of_user.size() - 1; 0 <= i; i--) {
+        Orders order = list_order_of_user.get(i);
+        Payment payment = paymentDAO.getPaymentByOrderId(order.getOrderId());
+        order.setPayment(payment); 
+        new_list_order.add(order);
+    }
         request.setAttribute("listOrder", new_list_order);
         request.getRequestDispatcher("order-user.jsp").forward(request, response);
     }

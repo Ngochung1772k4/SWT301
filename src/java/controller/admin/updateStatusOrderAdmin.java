@@ -1,44 +1,43 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
- */
-
 package controller.admin;
 
 import DAL.OrderDAO;
+import DAL.ProductDAO;
 import java.io.IOException;
-import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import java.util.List;
+import model.OrderDetails;
 
-/**
- *
- * @author ngoch
- */
-@WebServlet(name="updateStatusOrderAdmin", urlPatterns={"/admin/updateStatusOrderAdmin"})
+@WebServlet(name = "updateStatusOrderAdmin", urlPatterns = {"/admin/updateStatusOrderAdmin"})
 public class updateStatusOrderAdmin extends HttpServlet {
-   
-    /** 
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
+
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-    throws ServletException, IOException {
-           response.setContentType("text/html;charset=UTF-8");
+            throws ServletException, IOException {
+        response.setContentType("text/html;charset=UTF-8");
         String order_id = request.getParameter("orderId");
         String status = request.getParameter("status");
-        OrderDAO dao = new OrderDAO();
+        OrderDAO orderDAO = new OrderDAO();
+        ProductDAO productDAO = new ProductDAO();
+
         if (status != null) {
-            dao.changeStatusOrder(order_id, Integer.parseInt(status));
+            int newStatus = Integer.parseInt(status);
+            orderDAO.changeStatusOrder(order_id, newStatus);
+
+            // Restore product quantity if order is canceled (status = 3)
+            if (newStatus == 3) {
+                List<OrderDetails> orderDetails = orderDAO.getDetail(order_id);
+                for (OrderDetails detail : orderDetails) {
+                    int productId = detail.getProductId();
+                    int amount = detail.getAmount();
+                    productDAO.restoreProductQuantity(productId, amount);
+                }
+            }
+
             String errorMessage = "Cập nhật thành công!";
             request.getSession().setAttribute("errorMessage", errorMessage);
-
         } else {
             String errorMessage = "Cập nhật không thành công!";
             request.getSession().setAttribute("errorMessage", errorMessage);
@@ -46,40 +45,20 @@ public class updateStatusOrderAdmin extends HttpServlet {
         response.sendRedirect("listOrderAdmin");
     }
 
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-    /** 
-     * Handles the HTTP <code>GET</code> method.
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
-    throws ServletException, IOException {
-        processRequest(request, response);
-    } 
-
-    /** 
-     * Handles the HTTP <code>POST</code> method.
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
-    throws ServletException, IOException {
+            throws ServletException, IOException {
         processRequest(request, response);
     }
 
-    /** 
-     * Returns a short description of the servlet.
-     * @return a String containing servlet description
-     */
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        processRequest(request, response);
+    }
+
     @Override
     public String getServletInfo() {
         return "Short description";
-    }// </editor-fold>
-
+    }
 }

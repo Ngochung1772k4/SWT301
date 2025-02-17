@@ -57,25 +57,28 @@ public class Cart {
     public void removeItem(int id) {
         if (getItemById(id) != null) {
             items.remove(getItemById(id));
-
             if (items.isEmpty()) {
                 this.appliedCoupon = null;
             }
         }
     }
 
-    public double getTotalMoney() {
-        double total = items.stream()
-                .mapToDouble(i -> i.getQuantity() * i.getProduct().getDiscountPrice())
-                .sum();
-
-        if (appliedCoupon != null) {
-            double discount = total * appliedCoupon.getDiscountPercentage() / 100;
-            discount = Math.min(discount, appliedCoupon.getMaxDiscountAmount());
-            total -= discount;
-        }
-        return total;
+  public double getTotalMoney() {
+    double totalAmount = 0.0;
+    for (Item item : items) {
+        int quantity = item.getQuantity();
+        double discountPrice = item.getProduct().getDiscountPrice();
+        totalAmount += quantity * discountPrice;
     }
+    if (appliedCoupon != null) {      
+        double discountPercent = appliedCoupon.getDiscountPercentage();
+        double calculatedDiscount = totalAmount * (discountPercent / 100.0);      
+        double maxDiscount = appliedCoupon.getMaxDiscountAmount();
+        double actualDiscount = Math.min(calculatedDiscount, maxDiscount);
+        totalAmount -= actualDiscount;
+    }  
+    return totalAmount;
+}   
 
     public void setAppliedCoupon(Coupon appliedCoupon) {
         this.appliedCoupon = appliedCoupon;

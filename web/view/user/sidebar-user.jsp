@@ -54,9 +54,9 @@
             </ul>
             <div class="sidebar-footer">
                
-                <a href="/Organic_Food/logout" class="sidebar-link">
+                <a href="/Organic_Food/home" class="sidebar-link">
                     <i class="lni lni-exit"></i>
-                    <span>Logout</span>
+                    <span>Back</span>
                 </a>
             </div>
         </aside>

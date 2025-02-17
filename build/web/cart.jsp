@@ -14,6 +14,13 @@
 
     </head>
     <body>
+        <c:if test="${not empty sessionScope.errorMessage}">
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                ${sessionScope.errorMessage}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+            <c:remove var="errorMessage" scope="session"/>
+        </c:if>
         <h1>Shopping Cart</h1>
         <div class="container-fluid">
             <div class="row">
@@ -47,7 +54,9 @@
                         <div class="quantity-control">
                             <button><a href="updatecart?num=-1&id=${i.product.productId}">-</a></button>
                             <input type="text" readonly value="${i.quantity}"/> 
-                            <button><a href="updatecart?num=1&id=${i.product.productId}">+</a></button>
+                            <button>
+                                <a href="updatecart?num=1&id=${i.product.productId}" onclick="return checkMaxQuantity(${i.product.quantity}, ${i.quantity})">+</a>
+                            </button>
                         </div>
                     </td>
                     <td><fmt:formatNumber value="${i.product.getDiscountPrice()}" pattern="#,##0 đ"/></td> 
@@ -66,6 +75,7 @@
             <strong>Total Amount:</strong> 
             <span class="total-amount">
                 <fmt:formatNumber value="${cart.totalMoney}" pattern="#,##0 đ"/>
+                
             </span>
             <c:if test="${cart.appliedCoupon != null}">
                 <br>
@@ -75,6 +85,7 @@
                 </small>
             </c:if> 
         </div>
+            
 
 
 
@@ -178,23 +189,23 @@
             }
         </script>
         <script>
-                document.querySelector('.checkout-button').addEventListener('click', function (event) {
-                    event.preventDefault(); // Ngăn chặn hành động mặc định của form
+            document.querySelector('.checkout-button').addEventListener('click', function (event) {
+                event.preventDefault(); // Ngăn chặn hành động mặc định của form
 
-                    // Lấy thông tin từ session hoặc từ các biến khác
-                    const account_id = ${sessionScope.account.account_id}; // Lấy account_id từ session
-                    const fullname = "${sessionScope.account.fullname}";
-                    const phone_number = "${sessionScope.account.phone_number}";
-                    const email = "${sessionScope.account.email}";
-                    const address = "${sessionScope.account.address}";
-                    const total_money = ${sessionScope.cart.totalMoney};
+                // Lấy thông tin từ session hoặc từ các biến khác
+                const account_id = ${sessionScope.account.account_id}; // Lấy account_id từ session
+                const fullname = "${sessionScope.account.fullname}";
+                const phone_number = "${sessionScope.account.phone_number}";
+                const email = "${sessionScope.account.email}";
+                const address = "${sessionScope.account.address}";
+                const total_money = ${sessionScope.cart.totalMoney};
 
-                    // Gọi hàm confirmInfo để điền thông tin vào modal
-                    confirmInfo(account_id, fullname, phone_number, email, address, total_money);
+                // Gọi hàm confirmInfo để điền thông tin vào modal
+                confirmInfo(account_id, fullname, phone_number, email, address, total_money);
 
-                    // Hiển thị modal
-                    $('#confirmInfoModal').modal('show');
-                });
+                // Hiển thị modal
+                $('#confirmInfoModal').modal('show');
+            });
         </script>
         <script>
             $(document).ready(function () {
@@ -203,7 +214,7 @@
                     $.post('applycoupon', {coupon_code: code}, function (response) {
                         if (response === 'success') {
                             $('#couponMessage').text('Áp dụng mã thành công').removeClass('text-danger').addClass('text-success');
-                            location.reload(); 
+                            location.reload();
                         } else {
                             $('#couponMessage').text('Mã không hợp lệ').removeClass('text-success').addClass('text-danger');
                         }
@@ -212,18 +223,32 @@
             });
         </script>
         <script>
-    $(document).ready(function() {
-        $('#removeCouponBtn').click(function() {
-            $.post('applycoupon', { action: 'remove' }, function(response) {
-                if (response === 'success') {
-                    location.reload(); 
-                } else {
-                    alert('Có lỗi xảy ra');
-                }
+            $(document).ready(function () {
+                $('#removeCouponBtn').click(function () {
+                    $.post('applycoupon', {action: 'remove'}, function (response) {
+                        if (response === 'success') {
+                            location.reload();
+                        } else {
+                            alert('Có lỗi xảy ra');
+                        }
+                    });
+                });
             });
-        });
-    });
-</script>
+        </script>
+        <script>
+            function checkMaxQuantity(max, currentQuantity) {
+                if (currentQuantity >= max) {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Lỗi',
+                        text: 'Bạn không thể thêm quá số lượng tối đa.',
+                    });
+                    return false;
+                }
+                return true;
+            }
+        </script>
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     </body>
 </html>

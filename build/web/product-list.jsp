@@ -11,6 +11,8 @@
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
         <link rel="stylesheet" type="text/css" href="style.css">
         <%@ include file="header.jsp" %>
     </head>
@@ -35,7 +37,7 @@
                                         <div class="product-item">
                                             <figure>
                                                 <a href="ProductDetail?productId=${p.productId}" title="${p.name}">
-                                                    <img src="${not empty productImages[p.productId] ? productImages[p.productId][0].url : 'placeholder.jpg'}" alt="${p.name}" class="tab-image img-fluid">
+                                                    <img src="${p.imageUrl}" alt="${p.name}" class="tab-image img-fluid">
                                                 </a>
                                             </figure>
                                             <div class="d-flex flex-column text-center">
@@ -58,15 +60,21 @@
                                                                 <fmt:formatNumber value="${p.price}" type="number" groupingUsed="true" />đ
                                                             </span>
                                                         </c:otherwise>
+
                                                     </c:choose>
                                                 </div>
-                                                <c:if test="${p.quantity > 0}">
-                                                    <small class="text-muted">Còn lại: ${p.quantity} sản phẩm</small>
-                                                </c:if>
-                                                <c:if test="${p.quantity <= 0}">
-                                                    <small class="text-danger">Tạm hết hàng</small>
-                                                </c:if>
+                                                <small class="stock-info
+                                                       <c:choose>
+                                                           <c:when test="${p.quantity > 0}">text-muted</c:when>
+                                                           <c:otherwise>text-danger</c:otherwise>
+                                                       </c:choose>">
+                                                    <c:choose>
+                                                        <c:when test="${p.quantity > 0}">Còn lại: ${p.quantity} sản phẩm</c:when>
+                                                        <c:otherwise>Tạm hết hàng</c:otherwise>
+                                                    </c:choose>
+                                                </small>
                                             </div>
+
                                             <div class="button-area p-3 pt-0">
                                                 <form id="addToCartForm_${p.productId}" name="f${p.productId}" action="addtocart" method="post" class="add-to-cart-form">
                                                     <input type="hidden" name="id" value="${p.productId}">
@@ -125,81 +133,57 @@
             </div>
         </section>
     </body>
-<script type="text/javascript">
-    $(document).ready(function () {
-        $(".add-to-cart-form").submit(function (event) {
-            event.preventDefault(); // Ngăn chặn form submit mặc định
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $(".add-to-cart-form").submit(function (event) {
+               event.preventDefault();
+                    var form = $(this);
+                    var productId = form.find("input[name='id']").val();
+                    var quantityInput = form.find("input[name='num']");
+                    var quantity = parseInt(quantityInput.val());
 
-            var form = $(this);
-            var productId = form.find("input[name='id']").val();
-            var quantityInput = form.find("input[name='num']");
-            var quantity = parseInt(quantityInput.val());
-            var maxQuantity = parseInt(quantityInput.attr("max"));
-
-            // Kiểm tra số lượng hợp lệ
-            if (quantity > maxQuantity) {
-                alert("Số lượng vượt quá hàng tồn kho!");
-                return;
-            }
-
-            if (maxQuantity <= 0) {
-                alert("Sản phẩm đã hết hàng!");
-                return;
-            }
-
-            $.ajax({
-                url: 'addtocart',
-                type: 'POST',
-                data: { id: productId, num: quantity },
-                success: function (response) {
-                    // Cập nhật badge giỏ hàng
-                    $(".badge").text(response.size);
-
-                    // Tính số lượng tồn kho mới
-                    var newQuantity = maxQuantity - quantity;
-
-                    // Cập nhật giao diện
-                    updateProductStatusUI(form, newQuantity);
-
-                    alert("Sản phẩm đã được thêm vào giỏ hàng!");
-                },
-                error: function (xhr) {
-                    if (xhr.responseJSON && xhr.responseJSON.message) {
-                        alert(xhr.responseJSON.message); // Hiển thị thông báo lỗi từ server
-                    } else {
-                        alert("Có lỗi xảy ra khi thêm sản phẩm vào giỏ hàng.");
-                    }
-                }
+                    $.ajax({
+                        url: 'addtocart',
+                        type: 'POST',
+                        data: {
+                            id: productId,
+                            num: quantity
+                        },
+                        success: function (response) {
+                            if (response.status === "success") {
+                                $(".badge").text(response.size);
+                                toastr.success("Sản phẩm đã được thêm vào giỏ hàng!");
+                            } else {
+                                toastr.error(response.message.replace('localhost9999:say', ''));
+                            }
+                        },
+                        error: function (xhr) {
+                            try {
+                                var errorResponse = JSON.parse(xhr.responseText);
+                                toastr.error(errorResponse.message.replace('localhost9999:say', ''));
+                            } catch (e) {
+                                toastr.error("Có lỗi xảy ra khi thêm sản phẩm vào giỏ hàng.");
+                            }
+                        }
+                    });
+                });
             });
-        });
-    });
 
-    function updateProductStatusUI(form, newQuantity) {
-        // Cập nhật số lượng tồn kho hiển thị
-        var quantityText = form.closest(".product-item").find(".text-muted");
-        if (newQuantity > 0) {
-            quantityText.text("Còn lại: " + newQuantity + " sản phẩm");
-        } else {
-            quantityText.removeClass("text-muted").addClass("text-danger").text("Tạm hết hàng");
-        }
 
-        // Cập nhật input số lượng
-        var quantityInput = form.find("input[name='num']");
-        quantityInput.attr("max", newQuantity);
-        if (newQuantity <= 0) {
-            quantityInput.val(0).prop("disabled", true); // Vô hiệu hóa input
-        }
-
-        // Cập nhật nút thêm vào giỏ hàng
-        var addToCartButton = form.find(".add-to-cart-btn");
-        if (newQuantity <= 0) {
-            addToCartButton
-                .prop("disabled", true)
-                .removeClass("btn-primary")
-                .addClass("btn-secondary")
-                .text("Hết hàng");
-        }
-    }
+    </script>
+    <script>
+        toastr.options = {
+            closeButton: true, 
+            progressBar: true, 
+            positionClass: "toast-top-left",
+            preventDuplicates: true, 
+            timeOut: 2000, 
+            extendedTimeOut: 1000, 
+            showMethod: "slideDown", 
+            hideMethod: "slideUp", 
+            showEasing: "swing",
+            hideEasing: "linear",
+        };
 </script>
 
 

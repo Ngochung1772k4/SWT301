@@ -6,20 +6,20 @@
 package controller.user;
 
 import DAL.CategoryDAO;
-import DAL.ImagesDAO;
+
 import DAL.ProductDAO;
 import java.io.IOException;
-import java.io.PrintWriter;
+
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import java.util.HashMap;
+
 import java.util.List;
-import java.util.Map;
+
 import model.Category;
-import model.Images;
+
 import model.Product;
 
 /**
@@ -43,11 +43,9 @@ public class ProductController extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         request.setCharacterEncoding("UTF-8");
         ProductDAO productDAO = new ProductDAO();
-        ImagesDAO imagesDAO = new ImagesDAO();
         CategoryDAO categoryDAO = new CategoryDAO();
 
         try {
-
             List<Category> listCate = categoryDAO.getAllCategories();
             request.setAttribute("listCate", listCate);
 
@@ -78,12 +76,6 @@ public class ProductController extends HttpServlet {
             } else {
                 products = productDAO.getAllProducts();
             }
-              Map<Integer, List<Images>> productImages = new HashMap<>();
-            for (Product product : products) {
-                List<Images> images = imagesDAO.getImagesByProductId(product.getProductId());
-                productImages.put(product.getProductId(), images);
-            }
-            request.setAttribute("productImages", productImages);
             request.setAttribute("products", products);
             request.getRequestDispatcher("product-list.jsp").forward(request, response);
         } catch (Exception e) {
