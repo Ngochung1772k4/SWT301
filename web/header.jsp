@@ -68,9 +68,10 @@
                     </select>
 
                     <!-- Ô nh?p t? khóa -->
-                 
-                          <input name="txt" type="text" class="form-control border-0 bg-transparent" 
-                           placeholder="Search 20.000 products..." value="${param.txt}">
+
+                    <input name="txt" type="text" class="form-control border-0 bg-transparent" 
+                           placeholder="Search for more than 20,000 products" 
+                           value="<c:out value='${param.txt}' />">
 
 
                         <!-- Nút Submit -->
