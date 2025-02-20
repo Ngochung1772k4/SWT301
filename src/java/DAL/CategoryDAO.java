@@ -101,16 +101,19 @@ public class CategoryDAO extends DBcontext {
         }
     }
 
-    public void deleteCategory(int category_id) {
-        String query = "DELETE FROM [dbo].[Category] WHERE category_id = ?";
-        try {
-            java.sql.Connection conn = new DBcontext().getConnection();
-            PreparedStatement ps = conn.prepareStatement(query);
-            ps.setInt(1, category_id);
-            ps.executeUpdate();
-        } catch (Exception e) {
-        }
+ public void deleteCategory(int category_id) {
+    String query = "DELETE FROM [dbo].[Category] WHERE category_id = ?";
+    try (java.sql.Connection conn = new DBcontext().getConnection();
+         PreparedStatement ps = conn.prepareStatement(query)) {
+
+        ps.setInt(1, category_id);
+        ps.executeUpdate();
+
+    } catch (Exception e) {
+        e.printStackTrace(); // Nên log lỗi để debug dễ dàng
     }
+}
+
 
     public void deletedCategory(int categoryId) {
         String query = "UPDATE Category SET deleted = 1 WHERE category_id = ?";
