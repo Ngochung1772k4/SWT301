@@ -12,22 +12,45 @@
     </editor-bookmarks>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/ngoch/OneDrive/Desktop/11/Organic_Shop%20(1)/Organic_Shop%20(1)/Organic_Shop/src/java/DAL/AccountDAO.java</file>
             <file>file:/C:/Users/ngoch/OneDrive/Desktop/11/Organic_Shop%20(1)/Organic_Shop%20(1)/Organic_Shop/src/java/DAL/CategoryDAO.java</file>
-            <file>file:/C:/Users/ngoch/OneDrive/Desktop/11/Organic_Shop%20(1)/Organic_Shop%20(1)/Organic_Shop/src/java/controller/user/CheckoutController.java</file>
+            <file>file:/C:/Users/ngoch/OneDrive/Desktop/11/Organic_Shop%20(1)/Organic_Shop%20(1)/Organic_Shop/src/java/controller/admin/CheckDeleteSupplierController.java</file>
+            <file>file:/C:/Users/ngoch/OneDrive/Desktop/11/Organic_Shop%20(1)/Organic_Shop%20(1)/Organic_Shop/web/admin/sidebar.jsp</file>
             <file>file:/C:/Users/ngoch/OneDrive/Desktop/11/Organic_Shop%20(1)/Organic_Shop%20(1)/Organic_Shop/src/java/controller/user/UpdateUserController.java</file>
+            <file>file:/C:/Users/ngoch/OneDrive/Desktop/11/Organic_Shop%20(1)/Organic_Shop%20(1)/Organic_Shop/web/css/login_style.css</file>
             <file>file:/C:/Users/ngoch/OneDrive/Desktop/11/Organic_Shop%20(1)/Organic_Shop%20(1)/Organic_Shop/web/cart.jsp</file>
+            <file>file:/C:/Users/ngoch/OneDrive/Desktop/11/Organic_Shop%20(1)/Organic_Shop%20(1)/Organic_Shop/web/css/bootstrap.min.css</file>
             <file>file:/C:/Users/ngoch/OneDrive/Desktop/11/Organic_Shop%20(1)/Organic_Shop%20(1)/Organic_Shop/src/java/controller/user/UpdateCartController.java</file>
             <file>file:/C:/Users/ngoch/OneDrive/Desktop/11/Organic_Shop%20(1)/Organic_Shop%20(1)/Organic_Shop/src/java/controller/user/AddtoCartController.java</file>
-            <file>file:/C:/Users/ngoch/OneDrive/Desktop/11/Organic_Shop%20(1)/Organic_Shop%20(1)/Organic_Shop/src/java/DAL/DBcontext.java</file>
+            <file>file:/C:/Users/ngoch/OneDrive/Desktop/11/Organic_Shop%20(1)/Organic_Shop%20(1)/Organic_Shop/src/java/DAL/OrderDAO.java</file>
             <file>file:/C:/Users/ngoch/OneDrive/Desktop/11/Organic_Shop%20(1)/Organic_Shop%20(1)/Organic_Shop/web/header.jsp</file>
+            <file>file:/C:/Users/ngoch/OneDrive/Desktop/11/Organic_Shop%20(1)/Organic_Shop%20(1)/Organic_Shop/web/css/style.css</file>
+            <file>file:/C:/Users/ngoch/OneDrive/Desktop/11/Organic_Shop%20(1)/Organic_Shop%20(1)/Organic_Shop/src/java/controller/admin/DeleteSupplierController.java</file>
             <file>file:/C:/Users/ngoch/OneDrive/Desktop/11/Organic_Shop%20(1)/Organic_Shop%20(1)/Organic_Shop/web/view/user/detail-order.jsp</file>
+            <file>file:/C:/Users/ngoch/OneDrive/Desktop/11/Organic_Shop%20(1)/Organic_Shop%20(1)/Organic_Shop/web/view/user/sidebar-user.jsp</file>
             <file>file:/C:/Users/ngoch/OneDrive/Desktop/11/Organic_Shop%20(1)/Organic_Shop%20(1)/Organic_Shop/src/java/DAL/CartDAO.java</file>
             <file>file:/C:/Users/ngoch/OneDrive/Desktop/11/Organic_Shop%20(1)/Organic_Shop%20(1)/Organic_Shop/src/java/controller/user/RemoveFromCartController.java</file>
-            <file>file:/C:/Users/ngoch/OneDrive/Desktop/11/Organic_Shop%20(1)/Organic_Shop%20(1)/Organic_Shop/web/admin/categoryadmin.jsp</file>
+            <file>file:/C:/Users/ngoch/OneDrive/Desktop/11/Organic_Shop%20(1)/Organic_Shop%20(1)/Organic_Shop/web/admin/dashboardadmin.jsp</file>
             <file>file:/C:/Users/ngoch/OneDrive/Desktop/11/Organic_Shop%20(1)/Organic_Shop%20(1)/Organic_Shop/web/product-list.jsp</file>
+            <file>file:/C:/Users/ngoch/OneDrive/Desktop/11/Organic_Shop%20(1)/Organic_Shop%20(1)/Organic_Shop/src/java/DAL/UnitsDAO.java</file>
+            <file>file:/C:/Users/ngoch/OneDrive/Desktop/11/Organic_Shop%20(1)/Organic_Shop%20(1)/Organic_Shop/src/java/controller/user/LoginController.java</file>
+            <file>file:/C:/Users/ngoch/OneDrive/Desktop/11/Organic_Shop%20(1)/Organic_Shop%20(1)/Organic_Shop/src/java/DAL/SuppliersDAO.java</file>
+            <file>file:/C:/Users/ngoch/OneDrive/Desktop/11/Organic_Shop%20(1)/Organic_Shop%20(1)/Organic_Shop/web/admin/listorder-admin.jsp</file>
+            <file>file:/C:/Users/ngoch/OneDrive/Desktop/11/Organic_Shop%20(1)/Organic_Shop%20(1)/Organic_Shop/src/java/controller/admin/AddUnitController.java</file>
+            <file>file:/C:/Users/ngoch/OneDrive/Desktop/11/Organic_Shop%20(1)/Organic_Shop%20(1)/Organic_Shop/src/java/DAL/AccountDAO.java</file>
+            <file>file:/C:/Users/ngoch/OneDrive/Desktop/11/Organic_Shop%20(1)/Organic_Shop%20(1)/Organic_Shop/src/java/controller/user/CheckoutController.java</file>
+            <file>file:/C:/Users/ngoch/OneDrive/Desktop/11/Organic_Shop%20(1)/Organic_Shop%20(1)/Organic_Shop/web/admin/productadmin.jsp</file>
+            <file>file:/C:/Users/ngoch/OneDrive/Desktop/11/Organic_Shop%20(1)/Organic_Shop%20(1)/Organic_Shop/src/java/DAL/DBcontext.java</file>
+            <file>file:/C:/Users/ngoch/OneDrive/Desktop/11/Organic_Shop%20(1)/Organic_Shop%20(1)/Organic_Shop/src/java/DAL/RoleDAO.java</file>
+            <file>file:/C:/Users/ngoch/OneDrive/Desktop/11/Organic_Shop%20(1)/Organic_Shop%20(1)/Organic_Shop/src/java/DAL/ImagesDAO.java</file>
+            <file>file:/C:/Users/ngoch/OneDrive/Desktop/11/Organic_Shop%20(1)/Organic_Shop%20(1)/Organic_Shop/web/css/registration_style.css</file>
+            <file>file:/C:/Users/ngoch/OneDrive/Desktop/11/Organic_Shop%20(1)/Organic_Shop%20(1)/Organic_Shop/web/css/vendor.css</file>
+            <file>file:/C:/Users/ngoch/OneDrive/Desktop/11/Organic_Shop%20(1)/Organic_Shop%20(1)/Organic_Shop/web/admin/orderdetail-admin.jsp</file>
+            <file>file:/C:/Users/ngoch/OneDrive/Desktop/11/Organic_Shop%20(1)/Organic_Shop%20(1)/Organic_Shop/web/css/manager.css</file>
+            <file>file:/C:/Users/ngoch/OneDrive/Desktop/11/Organic_Shop%20(1)/Organic_Shop%20(1)/Organic_Shop/web/admin/categoryadmin.jsp</file>
             <file>file:/C:/Users/ngoch/OneDrive/Desktop/11/Organic_Shop%20(1)/Organic_Shop%20(1)/Organic_Shop/src/java/controller/user/ProductController.java</file>
+            <file>file:/C:/Users/ngoch/OneDrive/Desktop/11/Organic_Shop%20(1)/Organic_Shop%20(1)/Organic_Shop/web/css/normalize.css</file>
             <file>file:/C:/Users/ngoch/OneDrive/Desktop/11/Organic_Shop%20(1)/Organic_Shop%20(1)/Organic_Shop/web/view/user/detail-user.jsp</file>
+            <file>file:/C:/Users/ngoch/OneDrive/Desktop/11/Organic_Shop%20(1)/Organic_Shop%20(1)/Organic_Shop/web/admin/supplier-manager.jsp</file>
         </group>
     </open-files>
 </project-private>

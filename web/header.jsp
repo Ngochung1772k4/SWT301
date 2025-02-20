@@ -69,8 +69,9 @@
 
                     <!-- Ô nh?p t? khóa -->
                  
-<input name="txt" type="text" class="form-control border-0 bg-transparent" 
-       placeholder="Search products..." value="<c:out value="${param.txt}" />">
+ <input name="txt" type="text" class="form-control border-0 bg-transparent" 
+                           placeholder="Search products..." value="${param.txt}">
+
 
                         <!-- Nút Submit -->
                         <button type="submit" class="btn border-0 bg-transparent p-0">
