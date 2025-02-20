@@ -8,8 +8,8 @@ public class DBcontext {
         Connection conn = null;
         try {
             String url = "jdbc:sqlserver://localhost:1433;databaseName=hungdepzai"; 
-            String user = "hung"; 
-            String password = "123";
+            String user= System.getenv("DB USER"); 
+            String password =System.getenv("DB PASSWORD");
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
             conn = DriverManager.getConnection(url, user, password);
             System.out.println("Kết nối thành công!"); 
