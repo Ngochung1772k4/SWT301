@@ -44,21 +44,21 @@
                                 <h3 class="fw-bold fs-1 mb-3">Supplier Manager</h3>
                                 <h5 class="fw-light fs-3 mt-2">Search Condition</h5>
                                 <form method="get" action="suppliers">
-                                    <div class="fw-bold fs-3 mt-3 mb-3 ">
-                                        <label>Name</label>
-                                        <label>:</label>
-                                        <input class="ms-3 w-25" type="text" name="name" placeholder="Input name of supplier" value="${name}"/>
+                                    <div class="fw-bold fs-3 mt-3 mb-3">
+                                        <label for="nameInput">Name:</label>
+                                        <input id="nameInput" class="ms-3 w-25" type="text" name="name" placeholder="Input name of supplier" value="${name}" />
                                 </div>
+
                                 <div class="fw-bold fs-3 mt-3 mb-3">
-                                    <label>Contact info</label>
-                                    <label>:</label>
-                                    <input class="ms-3 w-25" type="text" name="contact_info" placeholder="Input contact of supplier" value="${contact_info}"/>
+                                    <label for="contactInfoInput">Contact info:</label>
+                                    <input id="contactInfoInput" class="ms-3 w-25" type="text" name="contact_info" placeholder="Input contact of supplier" value="${contact_info}" />
                                 </div>
+
                                 <div class="fw-bold fs-3 mt-3 mb-3">
-                                    <label>Address</label>
-                                    <label>:</label>
-                                    <input class="ms-3 w-25" type="text" name="address" placeholder="Input address of supplier" value="${address}"/>
+                                    <label for="addressInput">Address:</label>
+                                    <input id="addressInput" class="ms-3 w-25" type="text" name="address" placeholder="Input address of supplier" value="${address}" />
                                 </div>
+
                                 <button class="btn btn-primary btn-lg ms-2 mb-2">Search</button>
                                 <input type="hidden" name="index" value="${index}"/>
                             </form>

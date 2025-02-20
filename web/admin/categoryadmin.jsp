@@ -84,13 +84,13 @@
                         </div>
                         <div class="modal-body">					
                             <div class="form-group">
-                                <label>Name</label>
+                                 <label for="nameInput">Name</label>
                                 <input name="name" type="text" class="form-control" required>
                             </div>
                         </div>
                         <div class="modal-body">					
                             <div class="form-group">
-                                <label>Description</label>
+                                <label for="descriptionInput">Description</label>
                                 <input name="description" type="text" class="form-control" required>
                             </div>
                         </div>
@@ -115,9 +115,9 @@
                         <div class="modal-body">					
                             <div class="form-group">
                                 <input type="hidden" name="category_id" id="CategoryIdInput"/>
-                                <label>Name</label>
+                                <label for="CategoryNameInput">Name</label>
                                 <input name="re_name" type="text" class="form-control" id="CategoryNameInput" required>
-                                <label>Description</label>
+                                <label for="CategoryDescriptionInput">Description</label>
                                 <input name="re_description" type="text" class="form-control" id="CategoryDescriptionInput" required>
                             </div>
                         </div>
