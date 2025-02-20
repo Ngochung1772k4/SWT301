@@ -156,8 +156,8 @@
                                 <button type="button" class="btn btn-primary btn-sm" id="addImage">Add Image</button>
                             </div>
                             <div class="form-group">
-                                <label>Weight</label>
-                                <input name="weight" type="text" class="form-control" placeholder="g" required>
+                                <label for="weight">Weight</label>
+                                <input name="weight" id="weight" type="text" class="form-control" placeholder="g" required>
                             </div>
                             <div class="form-group">
                                 <label>Price</label>
