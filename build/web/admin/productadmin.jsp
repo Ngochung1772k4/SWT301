@@ -117,8 +117,8 @@
                         </div>
                         <div class="modal-body">					
                             <div class="form-group">
-                                <label>Name</label>
-                                <input name="name" type="text" class="form-control" required>
+                                <label for="name">Name</label>
+                                <input name="name" id="name" type="text" class="form-control" required>
                             </div>
                             <div class="form-group">
                                 <label>Category:</label>

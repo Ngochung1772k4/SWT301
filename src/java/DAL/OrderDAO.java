@@ -141,31 +141,30 @@ public void changeStatusOrder(String order_id, int status) {
 
 
 
-  public List<OrderDetails> getDetail(String order_id) {
+public List<OrderDetails> getDetail(String order_id) {
     List<OrderDetails> list = new ArrayList<>();
     String query = "SELECT od.order_id, od.product_id, od.price, od.amount, p.name, "
                  + "(SELECT TOP 1 url FROM Images WHERE product_id = p.product_id ORDER BY image_id) AS imageUrl "
                  + "FROM Orders_Details od "
                  + "JOIN Product p ON od.product_id = p.product_id "
                  + "WHERE od.order_id = ?";
-    try (Connection conn = new DBcontext().getConnection();
+
+    try (Connection conn = DBcontext.getConnection(); 
          PreparedStatement ps = conn.prepareStatement(query)) {
         ps.setString(1, order_id);
         ResultSet rs = ps.executeQuery();
         while (rs.next()) {
             String imageUrl = rs.getString("imageUrl");
-            // Xử lý trường hợp không có ảnh
             if (imageUrl == null) {
-                imageUrl = "/images/placeholder.jpg"; // Đặt ảnh mặc định
+                imageUrl = "/images/placeholder.jpg"; 
             }
             list.add(new OrderDetails(
                 rs.getInt("order_id"),
-                    
                 rs.getInt("price"),
                 rs.getInt("amount"),
                 rs.getString("name"),
                 imageUrl,
-                    rs.getInt("product_id") 
+                rs.getInt("product_id") 
             ));
         }
     } catch (Exception e) {
@@ -173,6 +172,7 @@ public void changeStatusOrder(String order_id, int status) {
     }
     return list;
 }
+
 
 public int getLastestOrderID() {
     String query = "SELECT MAX(order_id) AS latest_order_id FROM dbo.Orders";
@@ -265,13 +265,7 @@ public void insertOrderDetail(int order_id, int product_id, int price, int amoun
 
 
 
-    public static void main(String[] args) {
-        // Tạo một đối tượng Orders để kiểm thử
-        OrderDAO dao = new OrderDAO();
-        dao.getOrder();
-       
-        System.out.println("Order inserted successfully!");
-    }
+   
 }
 
 
