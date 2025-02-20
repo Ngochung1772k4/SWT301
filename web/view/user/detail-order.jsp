@@ -64,7 +64,7 @@
                                     <c:forEach items="${requestScope.listDetail}" var = "Detail">
                                         <tr style="font-size: 15px">
                                             <td>${Detail.name}</td>
-                                            <td><img style="width: 50%" src="${Detail.imageUrl}"></td>
+                                            <td><img style="width: 50%" src="${Detail.imageUrl}" alt="${Detal.name}"></td>
 
                                             <td>${Detail.amount}</td>
 
