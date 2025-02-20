@@ -12,7 +12,7 @@ body {
     box-shadow: 0 1px 1px rgba(0,0,0,.05);
 }
 .table-title {        
-    padding-bottom: 15px;
+ 
     background: #435d7d;
     color: #fff;
     padding: 16px 30px;
@@ -33,7 +33,6 @@ body {
     border: none;
     min-width: 50px;
     border-radius: 2px;
-    border: none;
     outline: none !important;
     margin-left: 10px;
 }
@@ -147,8 +146,6 @@ table.table .avatar {
 .custom-checkbox label:before{
     width: 18px;
     height: 18px;
-}
-.custom-checkbox label:before {
     content: '';
     margin-right: 10px;
     display: inline-block;
@@ -168,7 +165,6 @@ table.table .avatar {
     height: 11px;
     border: solid #000;
     border-width: 0 3px 3px 0;
-    transform: inherit;
     z-index: 3;
     transform: rotateZ(45deg);
 }

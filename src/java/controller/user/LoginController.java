@@ -51,7 +51,7 @@ public class LoginController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        Cookie ar[] = request.getCookies();
+        Cookie[] ar = request.getCookies();
         for (Cookie o : ar) {
             if (o.getName().equals("accCookie")) {
                 request.setAttribute("account_name", o.getValue());

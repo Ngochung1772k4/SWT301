@@ -19,43 +19,40 @@ import model.Category;
  */
 public class CategoryDAO extends DBcontext {
 
-    public List<Category> getAllCategories() {
-        List<Category> categories = new ArrayList<>();
-        try {
-            java.sql.Connection conn = DBcontext.getConnection();
-            String sql = "SELECT * FROM Category where deleted = 0";
-            PreparedStatement ps = conn.prepareStatement(sql);
-            ResultSet rs = ps.executeQuery();
-            while (rs.next()) {
+ public List<Category> getAllCategories() {
+    List<Category> categories = new ArrayList<>();
+    String sql = "SELECT * FROM Category WHERE deleted = 0";
 
-                Category category = new Category();
-                category.setCategoryId(rs.getInt("category_id"));
-                category.setName(rs.getString("name"));
-                category.setDescription(rs.getString("description"));
-                category.setCreatedAt(rs.getTimestamp("created_at"));
-                category.setDeleted(rs.getInt("deleted"));
-                categories.add(category);
+    try (java.sql.Connection conn = DBcontext.getConnection();
+         PreparedStatement ps = conn.prepareStatement(sql);
+         ResultSet rs = ps.executeQuery()) {
 
-            }
-            rs.close();
-            ps.close();
-            conn.close();
-
-        } catch (Exception e) {
-            e.printStackTrace();
+        while (rs.next()) {
+            Category category = new Category();
+            category.setCategoryId(rs.getInt("category_id"));
+            category.setName(rs.getString("name"));
+            category.setDescription(rs.getString("description"));
+            category.setCreatedAt(rs.getTimestamp("created_at"));
+            category.setDeleted(rs.getInt("deleted"));
+            categories.add(category);
         }
-        return categories;
+
+    } catch (Exception e) {
+        e.printStackTrace(); 
     }
 
-    public Category getCategoryById(int categoryId) {
-        Category category = null;
-        try {
+    return categories;
+}
 
-            java.sql.Connection conn = DBcontext.getConnection();
-            String sql = "SELECT * FROM Category WHERE category_id = ?";
-            PreparedStatement ps = conn.prepareStatement(sql);
-            ps.setInt(1, categoryId);
-            ResultSet rs = ps.executeQuery();
+ public Category getCategoryById(int categoryId) {
+    Category category = null;
+    String sql = "SELECT * FROM Category WHERE category_id = ?";
+
+    try (java.sql.Connection conn = DBcontext.getConnection();
+         PreparedStatement ps = conn.prepareStatement(sql)) {
+
+        ps.setInt(1, categoryId);
+        try (ResultSet rs = ps.executeQuery()) {
             if (rs.next()) {
                 category = new Category();
                 category.setCategoryId(rs.getInt("category_id"));
@@ -63,28 +60,28 @@ public class CategoryDAO extends DBcontext {
                 category.setDescription(rs.getString("description"));
                 category.setCreatedAt(rs.getTimestamp("created_at"));
             }
-            rs.close();
-            ps.close();
-            conn.close();
-        } catch (Exception e) {
-            e.printStackTrace();
         }
-        return category;
+    } catch (Exception e) {
+        e.printStackTrace(); 
     }
 
-    public void insertCategory(Category category) {
-        String query = "INSERT INTO [dbo].[Category] ([name],[description],[created_at])\n"
-                + "     VALUES (?,?,?)";
-        try {
-            java.sql.Connection conn = DBcontext.getConnection();
-            PreparedStatement ps = conn.prepareStatement(query);
-            ps.setString(1, category.getName());
-            ps.setString(2, category.getDescription());
-            ps.setTimestamp(3, category.getCreatedAt());
-            ps.executeUpdate();
-        } catch (Exception e) {
-        }
+    return category;
+}
+
+public void insertCategory(Category category) {
+    String query = "INSERT INTO [dbo].[Category] ([name],[description],[created_at]) VALUES (?,?,?)";
+    try (java.sql.Connection conn = DBcontext.getConnection();
+         PreparedStatement ps = conn.prepareStatement(query)) {
+        
+        ps.setString(1, category.getName());
+        ps.setString(2, category.getDescription());
+        ps.setTimestamp(3, category.getCreatedAt());
+        ps.executeUpdate();
+        
+    } catch (Exception e) {
+        e.printStackTrace(); 
     }
+}
 
     public void updateCategory(Category category) {
         String sql = "UPDATE [dbo].[Category] SET [name] = ?,[description] = ?,[created_at] = ?\n"
@@ -110,7 +107,7 @@ public class CategoryDAO extends DBcontext {
         ps.executeUpdate();
 
     } catch (Exception e) {
-        e.printStackTrace(); // Nên log lỗi để debug dễ dàng
+        e.printStackTrace(); 
     }
 }
 

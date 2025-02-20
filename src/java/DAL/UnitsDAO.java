@@ -38,31 +38,29 @@ public class UnitsDAO extends DBcontext {
         }
         return unit;
     }
-    
-    public List<Units> getAllUnit() {
-        List<Units> units = new ArrayList<>();
-        try {
-            java.sql.Connection conn = DBcontext.getConnection();
-            String sql = "SELECT * FROM Units";
-            PreparedStatement ps = conn.prepareStatement(sql);
-            ResultSet rs = ps.executeQuery();
-            while (rs.next()) {
 
-                Units unit = new Units();
-                unit.setUnitId(rs.getInt("unit_id"));
-                unit.setName(rs.getString("name"));
-                unit.setDescription(rs.getString("description"));
-                units.add(unit);
-            }
-            rs.close();
-            ps.close();
-            conn.close();
+   public List<Units> getAllUnit() {
+    List<Units> units = new ArrayList<>();
+    String sql = "SELECT * FROM Units";
 
-        } catch (Exception e) {
-            e.printStackTrace();
+    try (java.sql.Connection conn = DBcontext.getConnection();
+         PreparedStatement ps = conn.prepareStatement(sql);
+         ResultSet rs = ps.executeQuery()) {
+
+        while (rs.next()) {
+            Units unit = new Units();
+            unit.setUnitId(rs.getInt("unit_id"));
+            unit.setName(rs.getString("name"));
+            unit.setDescription(rs.getString("description"));
+            units.add(unit);
         }
-        return units;
+    } catch (Exception e) {
+        e.printStackTrace();
     }
+
+    return units;
+}
+
 
     public List<Units> getUnits() {
 
@@ -172,4 +170,3 @@ public class UnitsDAO extends DBcontext {
         return false;
     }
 }
-

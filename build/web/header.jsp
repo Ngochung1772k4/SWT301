@@ -1,6 +1,6 @@
 <!-- header.jsp -->
 
-
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
     <defs>
         <!-- Menu Icon -->
@@ -70,7 +70,7 @@
                     <!-- Ô nh?p t? khóa -->
                  
 <input name="txt" type="text" class="form-control border-0 bg-transparent" 
-       placeholder="Search products..." value="<c:out value='${param.txt}' />">
+       placeholder="Search products..." value="<c:out value="${param.txt}" />">
 
                         <!-- Nút Submit -->
                         <button type="submit" class="btn border-0 bg-transparent p-0">

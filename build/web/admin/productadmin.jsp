@@ -227,7 +227,7 @@
                                 <input name="name" type="text" class="form-control" id="nameInput2" required value="${Product.name}">
                             </div>
                             <div class="form-group">
-                                <label>Category:</label>
+                                <label for="category_idInput2">Category:</label>
                                 <select name="category_id" id="category_idInput2">
                                     <c:forEach items="${listCategory}" var="Category">
                                         <option value="${Category.categoryId}">${Category.name}</option>
@@ -235,13 +235,14 @@
                                 </select>
                             </div>
                             <div class="form-group">
-                                <label>Supplier:</label>
+                                <label for="supplier_idInput2">Supplier:</label>
                                 <select name="supplier_id" id="supplier_idInput2">
                                     <c:forEach items="${listSupplier}" var="Supplier">
                                         <option value="${Supplier.supplierId}">${Supplier.name}</option>
                                     </c:forEach>
                                 </select>
                             </div>
+
                             <div class="form-group">
                                 <label>Unit:</label>
                                 <select name="unit_id" id="unit_idInput2">
@@ -250,15 +251,15 @@
                                     </c:forEach>
                                 </select>
                             </div>
-                             <!-- Thêm phần xử lý ảnh -->
-                    <div class="form-group">
-                        <label>Images</label>
-                        <div id="imageFieldsEdit"> <!-- Khung chứa các ảnh -->
-                            <!-- Các trường ảnh sẽ được thêm động bằng JavaScript -->
-                        </div>
-                        <button type="button" class="btn btn-primary btn-sm" id="addImageEdit">Add Image</button>
-                    </div>
-                           
+                            <!-- Thêm phần xử lý ảnh -->
+                            <div class="form-group">
+                                <label>Images</label>
+                                <div id="imageFieldsEdit"> <!-- Khung chứa các ảnh -->
+                                    <!-- Các trường ảnh sẽ được thêm động bằng JavaScript -->
+                                </div>
+                                <button type="button" class="btn btn-primary btn-sm" id="addImageEdit">Add Image</button>
+                            </div>
+
                             <div class="form-group">
                                 <label>Weight</label>
                                 <input name="weight" type="text" class="form-control" id="weightInput2" placeholder="g" required>
@@ -360,7 +361,7 @@
                 if (e.target && e.target.classList.contains('remove-image')) {
                     e.target.closest('.image-input').remove();
                 }
-            });     
+            });
         </script>
 
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"

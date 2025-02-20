@@ -35,34 +35,30 @@ public class SuppliersDAO extends DBcontext {
         return supplier;
     }
     
-    public List<Suppliers> getAllSupplier() {
-        List<Suppliers> supplier = new ArrayList<>();
-        try {
-            java.sql.Connection conn = DBcontext.getConnection();
-            String sql = "SELECT * FROM Suppliers";
-            PreparedStatement ps = conn.prepareStatement(sql);
-            ResultSet rs = ps.executeQuery();
-            while (rs.next()) {
+  public List<Suppliers> getAllSupplier() {
+    List<Suppliers> supplierList = new ArrayList<>();
+    String sql = "SELECT * FROM Suppliers";
 
-                Suppliers supply = new Suppliers();
-                supply.setSupplierId(rs.getInt("supplier_id"));
-                supply.setName(rs.getString("name"));
-                supply.setContactInfo(rs.getString("contact_info")); 
-                supply.setAddress(rs.getString("address"));
-                supply.setCreatedAt(rs.getTimestamp("created_at"));
-                supplier.add(supply);
+    try (java.sql.Connection conn = DBcontext.getConnection();
+         PreparedStatement ps = conn.prepareStatement(sql);
+         ResultSet rs = ps.executeQuery()) {
 
-            }
-            rs.close();
-            ps.close();
-            conn.close();
-
-        } catch (Exception e) {
-            e.printStackTrace();
+        while (rs.next()) {
+            Suppliers supply = new Suppliers();
+            supply.setSupplierId(rs.getInt("supplier_id"));
+            supply.setName(rs.getString("name"));
+            supply.setContactInfo(rs.getString("contact_info"));
+            supply.setAddress(rs.getString("address"));
+            supply.setCreatedAt(rs.getTimestamp("created_at"));
+            supplierList.add(supply);
         }
-        return supplier;
+    } catch (Exception e) {
+        e.printStackTrace(); 
     }
-    
+
+    return supplierList;
+}
+
     public List<Suppliers> getSuppliersByPagingAndNameContactAddress(int index, int pageSize, String name, String contact_info, String address) {
 
         List<Suppliers> suppliers = new LinkedList<>();
