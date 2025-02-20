@@ -259,32 +259,35 @@
                                 </div>
                                 <button type="button" class="btn btn-primary btn-sm" id="addImageEdit">Add Image</button>
                             </div>
-
                             <div class="form-group">
-                                <label>Weight</label>
+                                <label for="weightInput2">Weight</label>
                                 <input name="weight" type="text" class="form-control" id="weightInput2" placeholder="g" required>
                             </div>
+
                             <div class="form-group">
-                                <label>Price</label>
+                                <label for="priceInput2">Price</label>
                                 <input name="price" type="text" class="form-control" id="priceInput2" placeholder="VND" required>
                             </div>
+
                             <div class="form-group">
-                                <label>Discount</label>
+                                <label for="discountInput2">Discount</label>
                                 <input name="discount" type="text" class="form-control" id="discountInput2" placeholder="%" required>
                             </div>
+
                             <div class="form-group">
-                                <label>Quantity</label>
+                                <label for="quantity2">Quantity</label>
                                 <input name="quantity" type="text" class="form-control" id="quantity2" required>
                             </div>
+
                             <div class="form-group">
-                                <label>Description</label>
-                                <textarea name="description" type="text" class="form-control" id="description2" required></textarea>
-                            </div>   
-                        </div>
-                        <div class="modal-footer">
-                            <input type="reset" class="btn btn-default" data-bs-dismiss="modal" value="Cancel">
-                            <input type="submit" class="btn btn-success" value="Edit">
-                        </div>
+                                <label for="description2">Description</label>
+                                <textarea name="description" class="form-control" id="description2" required></textarea>
+                            </div>
+
+                            <div class="modal-footer">
+                                <input type="reset" class="btn btn-default" data-bs-dismiss="modal" value="Cancel">
+                                <input type="submit" class="btn btn-success" value="Edit">
+                            </div>
                     </form>
                 </div>
             </div>

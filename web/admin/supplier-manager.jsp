@@ -24,7 +24,7 @@
         <div class="wrapper">
             <jsp:include page="sidebar.jsp"></jsp:include>
                 <div class="main">
-                    <nav class="navbar navbar-expand px-4 py-3">
+                    <nav class="navbar navbar-expand px-4 py-3" aria-label="Main navigation">
                         <div class="navbar-collapse collapse">
                             <ul class="navbar-nav ms-auto">
                                 <li class="nav-item dropdown">

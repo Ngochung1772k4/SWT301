@@ -1,5 +1,4 @@
 body {
-    /*    background-image: linear-gradient(135deg, #FAB2FF 10%, #1904E5 100%);*/
     background-size: cover;
     background-repeat: no-repeat;
     background-attachment: fixed;
@@ -35,7 +34,6 @@ body {
     color: #FFFFFF;
     background-size: cover;
     background-repeat: no-repeat;
-    /*    background-image: url("https://i.pinimg.com/736x/5d/73/ea/5d73eaabb25e3805de1f8cdea7df4a42--tumblr-backgrounds-iphone-phone-wallpapers-iphone-wallaper-tumblr.jpg");*/
     overflow: hidden;
 }
 .box-form .left .overlay {
@@ -110,18 +108,7 @@ body {
     margin-right: 7px;
     width: auto;
 }
-/*.box-form .right button {
-    float: right;
-    color: #fff;
-    font-size: 16px;
-    padding: 12px 35px;
-    border-radius: 50px;
-    display: inline-block;
-    border: 0;
-    outline: 0;
-    box-shadow: 0px 4px 20px 0px #49c628a6;
-    background-image: linear-gradient(135deg, #70F570 10%, #49C628 100%);
-}*/
+
 button{
     float: right;
     font-size: 16px;
@@ -133,11 +120,10 @@ label {
     position: relative;
     margin-left: 30px;
 }
-
 label::before {
     content: ' \f00c';
     position: absolute;
-    font-family: FontAwesome;
+    font-family: FontAwesome, sans-serif; 
     background: transparent;
     border: 3px solid #70F570;
     border-radius: 4px;
@@ -146,13 +132,15 @@ label::before {
     transition: all 0.2s linear;
 }
 
+
 label:hover::before {
-    font-family: FontAwesome;
+    font-family: FontAwesome, sans-serif; 
     content: ' \f00c';
     color: #fff;
     cursor: pointer;
     background: #70F570;
 }
+
 
 label:hover::before .text-checkbox {
     background: #70F570;
