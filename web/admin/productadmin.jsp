@@ -160,12 +160,12 @@
                                 <input name="weight" id="weight" type="text" class="form-control" placeholder="g" required>
                             </div>
                             <div class="form-group">
-                                <label>Price</label>
-                                <input name="price" type="text" class="form-control" placeholder="VND" required>
+                                <label for="price">Price</label>
+                                <input name="price" id="price" type="text" class="form-control" placeholder="VND" required>
                             </div>
                             <div class="form-group">
-                                <label>Discount</label>
-                                <input name="discount" type="text" class="form-control" placeholder="%" required>
+                                <label for="discount">Discount</label>
+                                <input name="discount" id="discount" type="text" class="form-control" placeholder="%" required>
                             </div>
                             <div class="form-group">
                                 <label>Quantity</label>

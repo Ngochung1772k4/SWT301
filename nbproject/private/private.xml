@@ -13,6 +13,7 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/C:/Users/ngoch/OneDrive/Desktop/11/Organic_Shop%20(1)/Organic_Shop%20(1)/Organic_Shop/src/java/DAL/CategoryDAO.java</file>
+            <file>file:/C:/Users/ngoch/OneDrive/Desktop/11/Organic_Shop%20(1)/Organic_Shop%20(1)/Organic_Shop/web/checkout_success.jsp</file>
             <file>file:/C:/Users/ngoch/OneDrive/Desktop/11/Organic_Shop%20(1)/Organic_Shop%20(1)/Organic_Shop/src/java/controller/admin/CheckDeleteSupplierController.java</file>
             <file>file:/C:/Users/ngoch/OneDrive/Desktop/11/Organic_Shop%20(1)/Organic_Shop%20(1)/Organic_Shop/web/admin/sidebar.jsp</file>
             <file>file:/C:/Users/ngoch/OneDrive/Desktop/11/Organic_Shop%20(1)/Organic_Shop%20(1)/Organic_Shop/src/java/controller/user/UpdateUserController.java</file>
@@ -41,6 +42,7 @@
             <file>file:/C:/Users/ngoch/OneDrive/Desktop/11/Organic_Shop%20(1)/Organic_Shop%20(1)/Organic_Shop/web/admin/productadmin.jsp</file>
             <file>file:/C:/Users/ngoch/OneDrive/Desktop/11/Organic_Shop%20(1)/Organic_Shop%20(1)/Organic_Shop/src/java/DAL/DBcontext.java</file>
             <file>file:/C:/Users/ngoch/OneDrive/Desktop/11/Organic_Shop%20(1)/Organic_Shop%20(1)/Organic_Shop/src/java/DAL/RoleDAO.java</file>
+            <file>file:/C:/Users/ngoch/OneDrive/Desktop/11/Organic_Shop%20(1)/Organic_Shop%20(1)/Organic_Shop/web/product-detail.jsp</file>
             <file>file:/C:/Users/ngoch/OneDrive/Desktop/11/Organic_Shop%20(1)/Organic_Shop%20(1)/Organic_Shop/src/java/DAL/ImagesDAO.java</file>
             <file>file:/C:/Users/ngoch/OneDrive/Desktop/11/Organic_Shop%20(1)/Organic_Shop%20(1)/Organic_Shop/web/css/registration_style.css</file>
             <file>file:/C:/Users/ngoch/OneDrive/Desktop/11/Organic_Shop%20(1)/Organic_Shop%20(1)/Organic_Shop/web/css/vendor.css</file>
