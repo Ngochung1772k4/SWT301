@@ -58,10 +58,10 @@
                                             <td>${Category.name}</td>
                                             <td>${Category.description}</td>
                                             <td >
-                                                <a onclick="CategoryInfo('${Category.categoryId}', '${Category.name}', '${Category.description}')" data-bs-toggle="modal" data-bs-target="#editCategoryModal" title="Edit"> 
-                                                    <i class="lni lni-pencil"></i></a>
-                                                <a onclick="CategoryInfo('${Category.categoryId}', '${Category.name}', '${Category.description}')" data-bs-toggle="modal" data-bs-target="#deleteCategoryModal" title="Delete">
-                                                    <i class="lni lni-trash-can"></i></a>
+                                                <button onclick="CategoryInfo('${Category.categoryId}', '${Category.name}', '${Category.description}')" data-bs-toggle="modal" data-bs-target="#editCategoryModal" title="Edit"> 
+                                                    <i class="lni lni-pencil"></i></button>
+                                                <button onclick="CategoryInfo('${Category.categoryId}', '${Category.name}', '${Category.description}')" data-bs-toggle="modal" data-bs-target="#deleteCategoryModal" title="Delete">
+                                                    <i class="lni lni-trash-can"></i></button>
                                             </td>
                                         </c:forEach>
                                     </tr>
